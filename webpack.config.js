@@ -1,6 +1,7 @@
 //webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const config = require('./public/config')[isDev ? 'dev' : 'build'];
 const path = require('path');
@@ -94,7 +95,16 @@ module.exports = {
             // hash: true //是否加上hash，默认是 false
         }),
 
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+
+        new CopyWebpackPlugin([
+            {
+                from: 'public/js/*.js',
+                to: path.resolve(__dirname, 'dist', 'js'),
+                flatten: false,
+            },
+            //还可以继续配置其它要拷贝的文件
+        ])
     ],
 
     devServer: {
