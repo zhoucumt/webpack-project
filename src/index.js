@@ -1,4 +1,7 @@
 //index.js
+//src/index.js
+import './index.less';
+
 class Animal {
     constructor(name) {
         this.name = name;
