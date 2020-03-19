@@ -1,9 +1,19 @@
 //webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const config = require('./public/config')[isDev ? 'dev' : 'build'];
+const path = require('path');
 
 module.exports = {
+    entry: './src/index.js',
+
+    output: {
+        path: path.resolve(__dirname, 'dist'), //必须是绝对路径
+        filename: 'bundle.[hash].js',
+        publicPath: '/' //通常是CDN地址
+    },
+
     devtool: 'cheap-module-eval-source-map',
 
     mode: isDev ? 'development' : 'production',
@@ -82,7 +92,9 @@ module.exports = {
             },
             config: config.template
             // hash: true //是否加上hash，默认是 false
-        })
+        }),
+
+        new CleanWebpackPlugin()
     ],
 
     devServer: {
