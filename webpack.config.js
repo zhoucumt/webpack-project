@@ -4,6 +4,8 @@ const isDev = process.env.NODE_ENV === 'development';
 const config = require('./public/config')[isDev ? 'dev' : 'build'];
 
 module.exports = {
+    devtool: 'cheap-module-eval-source-map',
+
     mode: isDev ? 'development' : 'production',
 
     module: {
@@ -44,7 +46,7 @@ module.exports = {
     ],
 
     devServer: {
-        port: '3000', //默认是8080
+        port: '3002', //默认是8080
         quiet: false, //默认不启用
         inline: true, //默认开启 inline 模式，如果设置为false,开启 iframe 模式
         stats: "errors-only", //终端仅打印 error
