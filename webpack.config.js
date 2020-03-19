@@ -64,10 +64,10 @@ module.exports = {
                 exclude: /node_modules/
             },
 
-            {
-                test: /.html$/,
-                use: 'html-withimg-loader'
-            }
+            // {
+            //     test: /.html$/,
+            //     use: 'html-withimg-loader'
+            // }
         ]
     },
 
