@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const config = require('./public/config')[isDev ? 'dev' : 'build'];
 const path = require('path');
@@ -51,14 +52,15 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: function () {
-                                return [
-                                    require('autoprefixer')({
-                                        "overrideBrowserslist": [
-                                            ">0.25%",
-                                            "not dead"
-                                        ]
-                                    })
-                                ]
+                                // return [
+                                //     require('autoprefixer')({
+                                //         "overrideBrowserslist": [
+                                //             ">0.25%",
+                                //             "not dead"
+                                //         ]
+                                //     })
+                                // ]
+                                return [require('autoprefixer')()];
                             }
                         }
                     },
@@ -101,13 +103,13 @@ module.exports = {
             // hash: true //是否加上hash，默认是 false
         }),
 
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin([
             {
                 from: 'public/js/*.js',
                 to: path.resolve(__dirname, 'dist', 'js'),
-                flatten: false,
+                flatten: true,
             },
             //还可以继续配置其它要拷贝的文件
         ]),
@@ -118,7 +120,9 @@ module.exports = {
             // publicPath:'../'
             // 如果你的output的publicPath配置的是 './' 这种相对路径，
             // 那么如果将css文件放在单独目录下，记得在这里指定一下publicPath 
-        })
+        }),
+
+        new OptimizeCssPlugin() 
     ],
 
     devServer: {
