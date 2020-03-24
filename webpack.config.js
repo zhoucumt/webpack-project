@@ -45,7 +45,15 @@ module.exports = {
             {
                 test: /\.(le|c)ss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, // 替换之前的 style-loader
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: isDev,
+                            reloadAll: true,
+                        }
+                    },
+    
+                    // MiniCssExtractPlugin.loader, // 替换之前的 style-loader
                     // 'style-loader',
                     'css-loader',
                     {
