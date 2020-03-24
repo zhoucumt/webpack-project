@@ -1,5 +1,8 @@
 //index.js
 //src/index.js
+// if(module && module.hot) {
+//     module.hot.accept()
+// }
 import './index.less';
 
 // class Animal {

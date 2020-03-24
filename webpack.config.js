@@ -1,4 +1,5 @@
 //webpack.config.js
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -130,10 +131,14 @@ module.exports = {
             // 那么如果将css文件放在单独目录下，记得在这里指定一下publicPath 
         }),
 
-        new OptimizeCssPlugin() 
+        new OptimizeCssPlugin(),
+
+        // 热更新插件
+        new webpack.HotModuleReplacementPlugin()
     ],
 
     devServer: {
+        hot: true,
         port: '3002', //默认是8080
         quiet: false, //默认不启用
         inline: true, //默认开启 inline 模式，如果设置为false,开启 iframe 模式
