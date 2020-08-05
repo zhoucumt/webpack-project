@@ -18,5 +18,6 @@ import './index.less';
 console.log('aaaa');
 
 document.getElementById('btn').onclick = function() {
+    // 按需加载
     import('./handle.js').then(fn => fn.default());
 }
