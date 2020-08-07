@@ -129,11 +129,13 @@ module.exports = {
         // 多页应用
         new HtmlWebpackPlugin({
             template: './public/index.html',
-            filename: 'index.html' //打包后的文件名
+            filename: 'index.html', //打包后的文件名
+            chunks: ['index']
         }),
         new HtmlWebpackPlugin({
             template: './public/login.html',
-            filename: 'login.html' //打包后的文件名
+            filename: 'login.html', //打包后的文件名
+            chunks: ['login']
         }),
 
         new CleanWebpackPlugin(),
