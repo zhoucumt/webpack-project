@@ -10,15 +10,20 @@ const config = require('./public/config')[isDev ? 'dev' : 'build'];
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    // entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        login: './src/login.js'
+    },
 
     output: {
         path: path.resolve(__dirname, 'dist'), //必须是绝对路径
-        filename: 'bundle.[hash].js',
-        publicPath: '/' //通常是CDN地址
+        // filename: 'bundle.[hash].js',
+        // publicPath: '/' //通常是CDN地址
+        filename: '[name].[hash:6].js'
     },
 
-    devtool: 'cheap-module-eval-source-map',
+    // devtool: 'cheap-module-eval-source-map',
 
     mode: isDev ? 'development' : 'production',
 
@@ -101,18 +106,16 @@ module.exports = {
 
     plugins: [
         //数组 放着所有的webpack插件
-        new HtmlWebpackPlugin({
-            template: './public/index.html',
-            filename: 'index.html', //打包后的文件名
-            minify: {
-                removeAttributeQuotes: false, //是否删除属性的双引号
-                collapseWhitespace: false, //是否折叠空白
-            },
-            config: config.template
-            // hash: true //是否加上hash，默认是 false
-        }),
-
-        // new CleanWebpackPlugin(),
+        // new HtmlWebpackPlugin({
+        //     template: './public/index.html',
+        //     filename: 'index.html', //打包后的文件名
+        //     minify: {
+        //         removeAttributeQuotes: false, //是否删除属性的双引号
+        //         collapseWhitespace: false, //是否折叠空白
+        //     },
+        //     config: config.template
+        //     // hash: true //是否加上hash，默认是 false
+        // }),
 
         new CopyWebpackPlugin([
             {
@@ -122,6 +125,19 @@ module.exports = {
             },
             //还可以继续配置其它要拷贝的文件
         ]),
+
+        // 多页应用
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: 'index.html' //打包后的文件名
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/login.html',
+            filename: 'login.html' //打包后的文件名
+        }),
+
+        new CleanWebpackPlugin(),
+
 
         new MiniCssExtractPlugin({
             filename: 'css/[name].css'
