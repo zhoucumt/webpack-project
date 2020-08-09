@@ -27,6 +27,11 @@ module.exports = {
 
     mode: isDev ? 'development' : 'production',
 
+    resolve: {
+        // 从左到右依次查找
+        modules: ['./src', 'node_modules']
+    },
+
     module: {
         rules: [
             {
