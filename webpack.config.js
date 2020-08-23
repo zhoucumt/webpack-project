@@ -32,6 +32,11 @@ module.exports = {
         modules: ['./src', 'node_modules']
     },
 
+    // 处理loader路径
+    resolveLoader: {
+        modules: ["./node_modules", "./src/loaders"],
+    },
+
     module: {
         rules: [
             {
@@ -55,36 +60,37 @@ module.exports = {
 
             {
                 test: /\.(le|c)ss$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: isDev,
-                            reloadAll: true,
-                        }
-                    },
+                use: ["styleLoader", "cssLoader", "lessLoader"]
+                // use: [
+                //     {
+                //         loader: MiniCssExtractPlugin.loader,
+                //         options: {
+                //             hmr: isDev,
+                //             reloadAll: true,
+                //         }
+                //     },
     
-                    // MiniCssExtractPlugin.loader, // 替换之前的 style-loader
-                    // 'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: function () {
-                                // return [
-                                //     require('autoprefixer')({
-                                //         "overrideBrowserslist": [
-                                //             ">0.25%",
-                                //             "not dead"
-                                //         ]
-                                //     })
-                                // ]
-                                return [require('autoprefixer')()];
-                            }
-                        }
-                    },
-                    'less-loader'],
-                exclude: /node_modules/
+                //     // MiniCssExtractPlugin.loader, // 替换之前的 style-loader
+                //     // 'style-loader',
+                //     'css-loader',
+                //     {
+                //         loader: 'postcss-loader',
+                //         options: {
+                //             plugins: function () {
+                //                 // return [
+                //                 //     require('autoprefixer')({
+                //                 //         "overrideBrowserslist": [
+                //                 //             ">0.25%",
+                //                 //             "not dead"
+                //                 //         ]
+                //                 //     })
+                //                 // ]
+                //                 return [require('autoprefixer')()];
+                //             }
+                //         }
+                //     },
+                //     'less-loader'],
+                // exclude: /node_modules/
             },
 
             {
