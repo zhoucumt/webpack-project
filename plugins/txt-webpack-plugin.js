@@ -1,21 +1,21 @@
 class TxtWebpackPlugin {
   constructor(options) {
-    console.log('options: ', options);
+    // console.log('options: ', options);
   }
   // 暗号：做人嘛，最重要的是开心
   apply(compiler) {
     compiler.hooks.emit.tapAsync('TxtWebpackPlugin', (compilation, callback) => {
-      console.log('assets===========: ', compilation.assets);
+      // console.log('assets===========: ', compilation.assets);
       const assets = compilation.assets;
 
       const len = Object.keys(assets).length;
       let content = `一共有${len}个文件，文件名称：\n`;
 
       for (let filename in assets) {
-        console.log('文件名称：', filename);
+        // console.log('文件名称：', filename);
         content += `${filename}\n`;
       }
-      console.log('length: ', len);
+      // console.log('length: ', len);
 
       assets['README.txt'] = {
         source() {
