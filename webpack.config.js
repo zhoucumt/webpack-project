@@ -174,6 +174,15 @@ module.exports = {
         stats: "errors-only", //终端仅打印 error
         overlay: false, //默认不启用
         clientLogLevel: "silent", //日志等级
-        compress: true //是否启用 gzip 压缩
+        compress: true, //是否启用 gzip 压缩,
+
+        // 前端模拟数据
+        before(app) {
+            app.get('/user', (req, res) => {
+                res.json({
+                    name: 'aaa'
+                });
+            })
+        }
     }
 }

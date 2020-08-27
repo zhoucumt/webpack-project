@@ -17,7 +17,9 @@ import './index.less';
 // const dog = new Animal('dog');
 console.log('aaaa');
 
-document.getElementById('btn').onclick = function() {
-    // 按需加载
-    import('./handle.js').then(fn => fn.default());
-}
+// document.getElementById('btn').onclick = function() {
+//     // 按需加载
+//     import('./handle.js').then(fn => fn.default());
+// }
+
+fetch('user').then(response => response.json()).then(data => console.log(data));
