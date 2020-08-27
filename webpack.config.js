@@ -8,6 +8,7 @@ const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 const config = require('./public/config')[isDev ? 'dev' : 'build'];
 const path = require('path');
+const TxtWebpackPlugin = require('./plugins/txt-webpack-plugin');
 
 module.exports = {
     // entry: './src/index.js',
@@ -163,7 +164,12 @@ module.exports = {
         new OptimizeCssPlugin(),
 
         // 热更新插件
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+
+        // 自定义插件
+        new TxtWebpackPlugin({
+            name: 'abc'
+        })
     ],
 
     devServer: {
