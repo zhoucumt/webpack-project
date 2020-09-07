@@ -2,7 +2,7 @@ class TxtWebpackPlugin {
   constructor(options) {
     // console.log('options: ', options);
   }
-  // 暗号：做人嘛，最重要的是开心
+
   apply(compiler) {
     compiler.hooks.emit.tapAsync('TxtWebpackPlugin', (compilation, callback) => {
       // console.log('assets===========: ', compilation.assets);
